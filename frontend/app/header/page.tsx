@@ -9,7 +9,7 @@ export default function Header() {
             Hello World
             </div>
             <div id='AuthLinks' className='flex space-x-4 items-center'>
-            <AuthRedirect type="login" />
+            <AuthRedirect type="signup"/>
             </div>
         </div>
     )

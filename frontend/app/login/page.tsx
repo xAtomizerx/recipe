@@ -8,7 +8,7 @@ export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(login, { error: null })
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-stone-800 rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
 
       <form action={formAction} className="space-y-4">
@@ -39,7 +39,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:bg-gray-400 transition-colors"
+          className="w-full bg-stone-700 text-red-800 hover:text-red-500 disabled:bg-gray-400 transition-colors"
         >
           {isPending ? 'Logging in...' : 'Login'}
         </button>

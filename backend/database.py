@@ -2,7 +2,7 @@ from sqlmodel import create_engine, SQLModel, Session
 from typing import Generator
 import os
 
-SQLALCHEMY_DATABASE_URL = os.getenv("POSTGRES_URL", "postgres://postgres.gokvsygolwnixgyodtsi:fl7yPRbYoxi8Hj14@aws-1-us-east-1.pooler.supabase.com:6543/postgres?sslmode=require&supa=base-pooler.x")
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql:///./recipes.db")
 # Create database engine
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, 

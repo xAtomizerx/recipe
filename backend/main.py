@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel, select, Session
@@ -22,8 +23,7 @@ app = FastAPI(lifespan=lifespan)
 
 # CORS Configuration
 origins = [
-    "https://recipe-4sku.vercel.app/",
-    "http://127.0.0.1:3000",
+    "https://recipe-4sku.vercel.app/"
 ]
 
 app.add_middleware(
@@ -43,4 +43,4 @@ def read_root():
     return {"message": "Welcome to the Recipe API"}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(app, host=os.getenv("SQLALCHEMY_DATABASE_URL"), port=8000, reload=True)

@@ -2,11 +2,20 @@ from sqlmodel import create_engine, SQLModel, Session
 from typing import Generator
 import os
 
-SQLALCHEMY_DATABASE_URL = os.getenv("POSTGRES_URL")
+sqlite_url = "sqlite:///./database.db"
+DATABASE_URL = os.getenv("DATABASE_URL", sqlite_url)
+
+# CRITICAL FIX: Ensure the protocol is correct for SQLAlchemy/SQLModel
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+# SQLite needs 'check_same_thread', but Postgres does not
+connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
+
 # Create database engine
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, 
-    connect_args={"check_same_thread": False}
+    DATABASE_URL, 
+    connect_args=connect_args
 )
 
 #initialize the database

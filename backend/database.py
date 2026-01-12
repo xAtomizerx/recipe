@@ -2,7 +2,7 @@ from sqlmodel import create_engine, SQLModel, Session
 from typing import Generator
 import os
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./recipes.db"
+SQLALCHEMY_DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL", "sqlite:///./recipes.db")
 # Create database engine
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, 

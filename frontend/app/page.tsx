@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 export default async function Home() {
   // 1. Point to your FastAPI backend URL (from Environment Variables)

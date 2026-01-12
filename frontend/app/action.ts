@@ -1,60 +1,61 @@
 'use server'
 
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 
-// Ensure the function name is 'signup' and it accepts (prevState, formData)
+// Define your FastAPI production URL (ideally use an environment variable)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://recipe-two-jet.vercel.app/';
+
 export async function signup(prevState: any, formData: FormData) {
-  const username = formData.get('username')
-  const email = formData.get('email')
-  const password = formData.get('password')
+  const username = formData.get('username');
+  const email = formData.get('email');
+  const password = formData.get('password');
 
-  const response = await fetch('https://gokvsygolwnixgyodtsi.supabase.co/auth/signup', {
+  // Change: Fetch to your FASTAPI backend, not Supabase directly
+  const response = await fetch(`${API_URL}/auth/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, email, password }),
-  })
+  });
 
-  const result = await response.json()
+  const result = await response.json();
 
   if (!response.ok) {
-    return { error: result.detail || "Signup failed." }
+    return { error: result.detail || "Signup failed." };
   }
 
-  redirect('/login')
+  redirect('/login');
 }
 
-import { cookies } from 'next/headers'
-
 export async function login(prevState: any, formData: FormData) {
-  const username = formData.get('username')
-  const password = formData.get('password')
+  const username = formData.get('username');
+  const password = formData.get('password');
 
-  // FastAPI expects OAuth2 password flow (Form Data, not JSON)
-  const authData = new URLSearchParams()
-  authData.append('username', username as string)
-  authData.append('password', password as string)
+  const authData = new URLSearchParams();
+  authData.append('username', username as string);
+  authData.append('password', password as string);
 
-  const response = await fetch('https://gokvsygolwnixgyodtsi.supabase.co/auth/token', {
+  // Change: Fetch to your FASTAPI backend /token endpoint
+  const response = await fetch(`${API_URL}/auth/token`, {
     method: 'POST',
     body: authData,
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  })
+  });
 
-  const result = await response.json()
+  const result = await response.json();
 
   if (!response.ok) {
-    return { error: result.detail || "Invalid username or password" }
+    return { error: result.detail || "Invalid username or password" };
   }
 
-  // Store JWT in a secure, HttpOnly cookie
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
   cookieStore.set('access_token', result.access_token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: '/',
-    maxAge: 60 * 20, // 20 minutes (matches your backend token expiry)
-  })
+    maxAge: 60 * 20, 
+  });
 
-  redirect('/recipes') // Send user to the recipes dashboard
+  redirect('/recipes');
 }

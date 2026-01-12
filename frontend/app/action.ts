@@ -34,7 +34,7 @@ export async function login(prevState: any, formData: FormData) {
   authData.append('username', username as string)
   authData.append('password', password as string)
 
-  const response = await fetch('http://localhost:8000/auth/token', {
+  const response = await fetch('https://recipe-two-jet.vercel.app/auth/token', {
     method: 'POST',
     body: authData,
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

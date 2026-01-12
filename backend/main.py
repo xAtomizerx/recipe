@@ -22,7 +22,7 @@ app = FastAPI(lifespan=lifespan)
 
 # CORS Configuration
 origins = [
-    "http://localhost:3000",
+    "https://recipe-4sku.vercel.app:3000",
     "http://127.0.0.1:3000",
 ]
 

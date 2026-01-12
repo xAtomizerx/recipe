@@ -8,7 +8,7 @@ export async function signup(prevState: any, formData: FormData) {
   const email = formData.get('email')
   const password = formData.get('password')
 
-  const response = await fetch('https://recipe-9811nf6hf-atomizers-projects.vercel.app/backend/auth/signup', {
+  const response = await fetch('https://recipe-two-jet.vercel.app/auth/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, email, password }),
@@ -34,7 +34,7 @@ export async function login(prevState: any, formData: FormData) {
   authData.append('username', username as string)
   authData.append('password', password as string)
 
-  const response = await fetch('https://recipe-9811nf6hf-atomizers-projects.vercel.app/auth/token', {
+  const response = await fetch('https://recipe-two-jet.vercel.app/auth/token', {
     method: 'POST',
     body: authData,
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

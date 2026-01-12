@@ -22,8 +22,8 @@ app = FastAPI(lifespan=lifespan)
 
 # CORS Configuration
 origins = [
-    "https://recipe-4sku-nl5xyu85j-atomizers-projects.vercel.app/",
     "https://recipe-4sku.vercel.app/",
+    "https://recipe-4sku-nl5xyu85j-atomizers-projects.vercel.app/",
 ]
 
 app.add_middleware(

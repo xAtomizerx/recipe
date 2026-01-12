@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
 from sqlmodel import Session
 from dotenv import load_dotenv
-from database import get_session
+from database import get_db
 
 load_dotenv()
 
@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("AUTH_SECRET_KEY")
 ALGORITHM = os.getenv("AUTH_ALGORITHM")
 
 # database dependancies
-db_dependency = Annotated[Session, Depends(get_session)]
+db_dependency = Annotated[Session, Depends(get_db)]
 
 # password hashing
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')

@@ -1,33 +1,34 @@
-from sqlmodel import create_engine, SQLModel, Session
-from typing import Generator
 import os
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import NullPool  # Import NullPool
 
-# 1. Configuration & Protocol Handling
-sqlite_url = "sqlite:///./database.db"
-DATABASE_URL = os.getenv("DATABASE_URL", sqlite_url)
+# 1. Get the URL from environment variable
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Fix for SQLAlchemy 1.4+ / 2.0+ compatibility with Supabase/Postgres
-if DATABASE_URL.startswith("postgres://"):
+# 2. Fix the protocol for SQLAlchemy (postgres:// -> postgresql://)
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-# 2. Engine Creation with Conditional Arguments
-is_postgres = DATABASE_URL.startswith("postgresql")
-
-connect_args = {"check_same_thread": False} if not is_postgres else {}
-
+# 3. Configure the engine
+# We use NullPool because Supabase Transaction Mode (port 6543) handles pooling for us.
 engine = create_engine(
     DATABASE_URL,
-    connect_args=connect_args,
-    pool_pre_ping=True,
-    pool_recycle=3600,
-    echo=False 
+    poolclass=NullPool, 
 )
 
-# 3. Database Initialization
-def init_db():
-    SQLModel.metadata.create_all(engine)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# 4. Session Management
-def get_session() -> Generator[Session, None, None]:
-    with Session(engine) as session:
-        yield session
+Base = declarative_base()
+
+def init_db():
+    # Creates tables in Supabase if they don't exist
+    Base.metadata.create_all(bind=engine)
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

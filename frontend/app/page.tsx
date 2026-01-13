@@ -22,6 +22,10 @@ export default async function Home() {
   }
 
   return (
-    <>Welcome to Recipe App</>
+    <>
+    <div>
+      Welcome to Recipe Vault!
+    </div>
+    </>
   );
 }

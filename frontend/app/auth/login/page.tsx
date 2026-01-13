@@ -1,8 +1,8 @@
 'use client'
 
 import { useActionState } from 'react'
-import { login } from '../action'
-import AuthRedirect from '../components/AuthRedirect'
+import { login } from '../../action'
+import AuthRedirect from '../../components/AuthRedirect'
 
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(login, { error: null })

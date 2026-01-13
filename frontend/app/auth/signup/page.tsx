@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
-import { signup } from '../action' 
+import { signup } from '../../action' 
 
 export default function SignupPage() {
   const [state, formAction, isPending] = useActionState(signup, { error: null })

@@ -12,7 +12,7 @@ export async function signup(prevState: any, formData: FormData) {
   const password = formData.get('password');
 
   // Change: Fetch to your FASTAPI backend, not Supabase directly
-  const response = await fetch(`${API_URL}/auth/signup`, {
+  const response = await fetch(`${API_URL}auth/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, email, password }),
@@ -36,7 +36,7 @@ export async function login(prevState: any, formData: FormData) {
   authData.append('password', password as string);
 
   // Change: Fetch to your FASTAPI backend /token endpoint
-  const response = await fetch(`${API_URL}/auth/token`, {
+  const response = await fetch(`${API_URL}auth/token`, {
     method: 'POST',
     body: authData,
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

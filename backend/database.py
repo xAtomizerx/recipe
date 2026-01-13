@@ -7,11 +7,11 @@ from sqlalchemy.pool import NullPool
 
 load_dotenv()
 # 1. Get the URL from environment variable
-DATABASE_URL = os.getenv("SB_DATABASE_URL")
+DATABASE_URL = os.getenv("SUPA_DATABASE_URL")
 
 # 2. Ensure DATABASE_URL is set
 if not DATABASE_URL:
-    raise ValueError("SB_DATABASE_URL environment variable is not set")
+    raise ValueError("SUPA_DATABASE_URL environment variable is not set")
 
 # 3. Fix the protocol for SQLAlchemy (postgres:// -> postgresql://)
 if DATABASE_URL.startswith("postgres://"):

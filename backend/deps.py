@@ -6,7 +6,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlmodel import Session
 from dotenv import load_dotenv
-from database import get_db
+from database import get_session
 
 load_dotenv()
 
@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("AUTH_SECRET_KEY")
 ALGORITHM = os.getenv("AUTH_ALGORITHM")
 
 # 1. Standardized DB Dependency
-db_dependency = Annotated[Session, Depends(get_db)]
+db_dependency = Annotated[Session, Depends(get_session)]
 
 # 2. OAuth2 Scheme
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')

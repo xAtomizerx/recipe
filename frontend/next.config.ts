@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
         // You can also use a wildcard for all github.dev subdomains if needed
         "*.app.github.dev",
         "recipe-4sku.vercel.app",
+        "https://gokvsygolwnixgyodtsi.supabase.co",
       ],
     },
   }

@@ -2,7 +2,7 @@
 export default async function Home() {
   // 1. Point to your FastAPI backend URL (from Environment Variables)
   // Use a fallback for local development
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || '"https://gokvsygolwnixgyodtsi.supabase.co"';
 
   let backendStatus = "Checking...";
 

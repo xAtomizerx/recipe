@@ -17,6 +17,7 @@ app = FastAPI(lifespan=lifespan)
 
 origins = [
     "https://recipe-4sku.vercel.app",
+    "https://gokvsygolwnixgyodtsi.supabase.co",
     "localhost:3000",
 ]
 

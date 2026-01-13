@@ -8,7 +8,9 @@ from pydantic import BaseModel
 from models import User
 from auth_utils import bcrypt_context, db_dependency, SECRET_KEY, ALGORITHM
 
+
 router = APIRouter(prefix='/auth', tags=['auth'])
+
 
 class UserCreateRequest(BaseModel):
     username: str

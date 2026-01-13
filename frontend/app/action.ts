@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 
 // Define your FastAPI production URL (ideally use an environment variable)
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://recipe-two-jet.vercel.app';
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function signup(prevState: any, formData: FormData) {
   const username = formData.get('username');

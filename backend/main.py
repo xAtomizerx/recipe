@@ -16,9 +16,9 @@ app = FastAPI(lifespan=lifespan)
 
 
 origins = [
+    "https://special-goggles-r4qjq6gwv67g3p4-3000.app.github.dev/",
     "https://recipe-4sku.vercel.app",
     "https://recipe-4sku-nl5xyu85j-atomizers-projects.vercel.app",
-    "http://localhost:3000",
 ]
 
 app.add_middleware(

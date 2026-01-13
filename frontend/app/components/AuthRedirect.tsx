@@ -13,7 +13,7 @@ export default function AuthRedirect({ type }: AuthRedirectProps) {
       <p>
         {isLogin ? "Don't have an account?" : "Already have an account?"}
         <Link 
-          href={isLogin ? "/signup" : "/login"}
+          href={isLogin ? "/auth/signup" : "/auth/login"}
           className="ml-1 font-semibold text-red-900 hover:text-red-500 transition-colors"
         >
           {isLogin ? "Sign Up here" : "Log In here"}
